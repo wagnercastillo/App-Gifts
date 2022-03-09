@@ -1,24 +1,30 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-export const AddCategory = () => {
+export const AddCategory = ({ setCategorias }) => {
+	const [inputValue, setInputValue] = useState('');
 
-    const [inputValue, setInputValue] = useState('Hola mundo')
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value)
-    }
+	const handleInputChange = (e) => {
+		setInputValue(e.target.value);
+	};
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        
-    }
+	const handleSubmit = (e) => {
+		if (inputValue.trim().length > 2) {
+			e.preventDefault();
+			setCategorias((categorias) => [...categorias, inputValue]);
+		}
+	};
 	return (
-		<form onSubmit={ handleSubmit }>
-			<input 
-                type="text"
-                value={inputValue}
-                onChange={handleInputChange}
-
-            />
+		<form onSubmit={handleSubmit}>
+			<input type="text" value={inputValue} onChange={handleInputChange} />
 		</form>
 	);
+};
+
+AddCategory.defaultProps = {
+	setCategorias: { setCategorias: ["One Punch", "Samurai X", "Dragon Ball"] },
+};
+
+AddCategory.propTypes = {
+	setCategorias: PropTypes.func.isRequired,
 };
