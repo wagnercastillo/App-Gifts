@@ -11,6 +11,11 @@ body{
 button{
   font-size: 1.2rem;
   color: #21232a;
-  
-  
+    
+}
+
+input{
+  width: 100%;
+  font-size: 1.2rem;
+  color: #21232a;
 }
