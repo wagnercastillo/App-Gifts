@@ -1,19 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getGifs } from "../helpers/getGifs";
 
-export const useFetchGifs = () => {
+export const useFetchGifs = (categoria) => {
+	
+	const [state, setState] = useState({
+		data: [],
+		loading: true,
+	});
 
-    const [state, setState] = useState({
-        data: [],
-        loading: true
-    })
+	useEffect(() => {
+		getGifs(categoria).then((img) => {
+			setTimeout(() => {
+				setState({
+					data: img,
+					loading: false,
+				});
+			},1000);
+		});
+	}, [categoria]);
 
-    setTimeout(() => {
-        setState({
-            data: ['123', '456'],
-            loading: false
-        })
-    }, 3000);
-
-    return state; 
-
-};
+	return state;
+};  
